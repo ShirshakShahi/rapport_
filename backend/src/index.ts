@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ msg: "hiiiiiiiieeeeeeeeeeeeeeeee" });
+  res.status(200).json({ msg: "github testttt" });
 });
 
 const start = async () => {
