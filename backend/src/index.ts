@@ -1,31 +1,30 @@
-import express from "express";
-import { Request, Response } from "express";
+import express, { Express, Request, Response } from "express";
 import connectDB from "./db/connect";
 import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 8080;
+const app: Express = express();
+const port: number = parseInt(process.env.PORT || "8080", 10);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ msg: "github testttt" });
 });
 
-const start = async () => {
+const start = async (): Promise<void> => {
   try {
-    await connectDB(process.env.MONGO_URI);
+    await connectDB(process.env.MONGO_URI as string);
     app.listen(port, () =>
-      console.log(`server listening on port http://localhost:${port}`)
+      console.log(`Server listening on port http://localhost:${port}`)
     );
-  } catch (error) {
-    console.log(`Error occured as ${error.message}`);
+  } catch (error: any) {
+    console.log(`Error occurred: ${error.message}`);
+    process.exit(1);
   }
 };
 
