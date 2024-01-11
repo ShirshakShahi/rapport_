@@ -7,6 +7,11 @@ import {
   updatePost,
 } from "../controllers/post.controller";
 import { auth } from "../middlewares/auth.middleware";
+import {
+  addComment,
+  deleteComment,
+  updateComment,
+} from "../controllers/likes_and_comments.controller";
 
 const router: Router = express.Router();
 
@@ -16,5 +21,12 @@ router
   .get(getSinglePost)
   .patch(auth, updatePost)
   .delete(auth, deletePost);
+
+router.route("/:postId/comments").post(auth, addComment);
+
+router
+  .route("/:postId/comments/:commentId")
+  .delete(auth, deleteComment)
+  .patch(auth, updateComment);
 
 export { router as postRoute };
