@@ -25,7 +25,7 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
       }
 
       try {
-        const user = await User.findById(decoded.userId);
+        const user = await User.findById(decoded.userId).select("-password");
 
         if (!user) {
           res.status(404).json({ msg: "User not found." });
