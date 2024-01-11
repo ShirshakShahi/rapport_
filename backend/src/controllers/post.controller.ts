@@ -1,6 +1,6 @@
 import { Post } from "../models/post.model";
 
-export const addPost = async (req, res) => {
+const addPost = async (req, res) => {
   try {
     const { title, content } = req.body;
     const newPost = new Post({
@@ -17,7 +17,7 @@ export const addPost = async (req, res) => {
   }
 };
 
-export const updatePost = async (req, res) => {
+const updatePost = async (req, res) => {
   const { postId } = req.params;
   try {
     const post = await Post.findById(postId);
@@ -43,7 +43,7 @@ export const updatePost = async (req, res) => {
   }
 };
 
-export const deletePost = async (req, res) => {
+const deletePost = async (req, res) => {
   const { postId } = req.params;
   try {
     const post = await Post.findById(postId);
@@ -66,8 +66,44 @@ export const deletePost = async (req, res) => {
   }
 };
 
-export const deletePost = async (req, res) => {};
+const getSinglePost = async (req, res) => {
+  const { postId } = req.params;
 
-export const getSinglePost = async (req, res) => {};
+  try {
+    const post = await Post.findById(postId);
 
-export const getAllPosts = async (req, res) => {};
+    if (!post) {
+      res.status(404).json({ msg: `No post with id ${postId} found` });
+      return;
+    }
+
+    res.status(200).json({ post });
+  } catch (error) {
+    console.log("error ", error);
+    res.status(500).json({ msg: "Internal Server Error!!!" });
+  }
+};
+
+const getAllPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({});
+
+    if (posts.length === 0) {
+      res.status(404).json({ msg: "No posts found" });
+      return;
+    }
+
+    res.status(200).json({ posts });
+  } catch (error) {
+    console.log("error ", error);
+    res.status(500).json({ msg: "Internal Server Error!!!" });
+  }
+};
+
+export {
+  addPost,
+  updatePost,
+  deletePost,
+  getSinglePost,
+  getAllPosts
+};
