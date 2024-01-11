@@ -9,11 +9,6 @@ const addComment = async (req, res) => {
       res.status(404).json({ msg: `No post with id ${postId} found ` });
     }
 
-    if (!req.user) {
-      res.status(401).json({ msg: "Auth Invalid : Please login first" });
-      return;
-    }
-
     const newComment = {
       text: req.body.text,
       user: req.user._id,
@@ -40,35 +35,89 @@ const deleteComment = async (req, res) => {
   const { postId, commentId } = req.params;
 
   try {
-    if (!req.user) {
-      return res
-        .status(401)
-        .json({ msg: "Unauthorized: Authentication required" });
-    }
-
-    const post = await Post.findByIdAndUpdate(
-      postId,
-      { $pull: { comments: { _id: commentId, user: req.user._id } } },
-      { new: true }
-    );
+    const post = await Post.findById(postId);
 
     if (!post) {
-      return res.status(404).json({ msg: `No post with id ${postId} found` });
+      return res
+        .status(404)
+        .json({ msg: `No post with id ${postId} found!!!` });
     }
 
-    if (!post.comments.length) {
+    if (post.comments.length === 0) {
       return res.status(404).json({
-        msg: `No comment with id ${commentId} found in the specified post`,
+        msg: `No comment found the specified post`,
       });
     }
 
-    res.status(200).json({ msg: "Comment deleted successfully" });
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json({ msg: "Internal Server Error" });
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment._id.toString() === commentId
+    );
+
+    if (commentIndex === -1) {
+      return res.status(404).json({ msg: "No comment found" });
+    }
+
+    if (!req.user._id.equals(post.comments[commentIndex].user)) {
+      return res.status(401).json({ msg: "Invalid Credentials" });
+    }
+
+    const deletedComment = post.comments[commentIndex];
+
+    post.comments.splice(commentIndex, 1);
+
+    const updatedPost = await post.save();
+
+    res.status(200).json({ deletedComment, updatedPost });
+  } catch (err) {
+    console.log("Error:", err);
+    return res
+      .status(500)
+      .json({ msg: "Internal Server Error", error: err.message });
   }
 };
 
-const updateComment = async (req, res) => {};
+const updateComment = async (req, res) => {
+  const { postId, commentId } = req.params;
+
+  try {
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res
+        .status(404)
+        .json({ msg: `No post with id ${postId} found!!!` });
+    }
+
+    if (post.comments.length === 0) {
+      return res.status(404).json({
+        msg: `No comment found the specified post`,
+      });
+    }
+
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment._id.toString() === commentId
+    );
+
+    if (commentIndex === -1) {
+      return res.status(404).json({ msg: "No comment found" });
+    }
+
+    if (!req.user._id.equals(post.comments[commentIndex].user)) {
+      return res.status(401).json({ msg: "Invalid Credentials" });
+    }
+
+    post.comments[commentIndex].text =
+      req.body.text || post.comments[commentIndex].text;
+
+    const updatedPost = await post.save();
+
+    res.status(200).json({ updatedPost });
+  } catch (err) {
+    console.log("Error:", err);
+    return res
+      .status(500)
+      .json({ msg: "Internal Server Error", error: err.message });
+  }
+};
 
 export { addComment, deleteComment, updateComment };

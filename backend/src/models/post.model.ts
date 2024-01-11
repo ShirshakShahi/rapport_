@@ -5,6 +5,7 @@ export interface ILike {
 }
 
 export interface IComment {
+  _id?: string;
   user: Schema.Types.ObjectId;
   text: string;
 }
