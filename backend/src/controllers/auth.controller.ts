@@ -26,8 +26,7 @@ const signupHandler = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({ data: newUser });
   } catch (error: any) {
-    console.log("error ", error._message);
-    res.status(500).json({ msg: "Internal Server Error" });
+    res.status(500).json({ msg:  "Internal Server Error" });
   }
 };
 
@@ -52,7 +51,6 @@ const loginHandler = async (req: Request, res: Response) => {
     });
     res.status(200).json({ token });
   } catch (error: any) {
-    console.log("error ", error._message);
     res.status(500).json({ msg: "Internal Server Error" });
   }
 };

@@ -10,10 +10,10 @@ const addProfile = async (req, res) => {
       bio: bio ? bio : "",
       profilePic: profilePic ? profilePic : "",
       socialMedia: {
-        LinkedIn: socialMedia.LinkedIn ? socialMedia.LinkedIn : "",
-        Facebook: socialMedia.Facebook ? socialMedia.Facebook : "",
-        Instagram: socialMedia.Instagram ? socialMedia.Instagram : "",
-        Github: socialMedia.Github ? socialMedia.Github : "",
+        LinkedIn: socialMedia.LinkedIn ?? "",
+        Facebook: socialMedia.Facebook ?? "",
+        Instagram: socialMedia.Instagram ?? "",
+        Github: socialMedia.Github ?? "",
       },
       skills: [],
     };

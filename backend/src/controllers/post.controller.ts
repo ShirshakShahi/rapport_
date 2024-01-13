@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { Post } from "../models/post.model";
 
 const addPost = async (req, res) => {
@@ -12,7 +13,6 @@ const addPost = async (req, res) => {
     await newPost.save();
     res.status(200).json({ newPost });
   } catch (error) {
-    console.log("error ", error);
     res.status(500).json({ msg: "Internal Server Error!!!" });
   }
 };
@@ -38,7 +38,6 @@ const updatePost = async (req, res) => {
 
     res.status(200).json({ updatedPost });
   } catch (err) {
-    console.log("errorrrrr", err);
     return res.status(500).json({ msg: "Internal Server Error" });
   }
 };
@@ -48,7 +47,9 @@ const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(postId);
     if (!post) {
-      res.status(404).json({ msg: `No post with id ${postId} found!!!` });
+      return res
+        .status(404)
+        .json({ msg: `No post with id ${postId} found!!!` });
       return;
     }
 
@@ -61,12 +62,11 @@ const deletePost = async (req, res) => {
 
     res.status(200).json({ deletedPost });
   } catch (err) {
-    console.log("errorrrrr", err);
     return res.status(500).json({ msg: "Internal Server Error" });
   }
 };
 
-const getSinglePost = async (req, res) => {
+const getSinglePost = async (req: Request, res: Response) => {
   const { postId } = req.params;
 
   try {
@@ -79,12 +79,11 @@ const getSinglePost = async (req, res) => {
 
     res.status(200).json({ post });
   } catch (error) {
-    console.log("error ", error);
     res.status(500).json({ msg: "Internal Server Error!!!" });
   }
 };
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req: Request, res: Response) => {
   try {
     const posts = await Post.find({});
 
@@ -95,15 +94,8 @@ const getAllPosts = async (req, res) => {
 
     res.status(200).json({ posts });
   } catch (error) {
-    console.log("error ", error);
     res.status(500).json({ msg: "Internal Server Error!!!" });
   }
 };
 
-export {
-  addPost,
-  updatePost,
-  deletePost,
-  getSinglePost,
-  getAllPosts
-};
+export { addPost, updatePost, deletePost, getSinglePost, getAllPosts };

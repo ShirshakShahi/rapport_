@@ -69,7 +69,6 @@ const deleteComment = async (req, res) => {
 
     res.status(200).json({ deletedComment, updatedPost });
   } catch (err) {
-    console.log("Error:", err);
     return res
       .status(500)
       .json({ msg: "Internal Server Error", error: err.message });
@@ -113,7 +112,6 @@ const updateComment = async (req, res) => {
 
     res.status(200).json({ updatedPost });
   } catch (err) {
-    console.log("Error:", err);
     return res
       .status(500)
       .json({ msg: "Internal Server Error", error: err.message });

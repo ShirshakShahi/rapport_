@@ -30,7 +30,6 @@ const start = async (): Promise<void> => {
       console.log(`Server listening on port http://localhost:${port}`)
     );
   } catch (error: any) {
-    console.log(`Error occurred: ${error.message}`);
     process.exit(1);
   }
 };

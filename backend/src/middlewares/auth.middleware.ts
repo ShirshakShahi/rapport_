@@ -13,8 +13,6 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
 
   const decoded = token.split(" ")[1];
 
-  console.log(decoded);
-
   jwt.verify(
     decoded,
     process.env.JWT_SECRET_KEY,
@@ -35,7 +33,6 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
         (req as any).user = user;
         next();
       } catch (error) {
-        console.log("error in authhhh", error);
         res.status(500).json({ msg: "Internal Server Error" });
       }
     }
