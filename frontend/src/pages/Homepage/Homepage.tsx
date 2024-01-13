@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Homepage: React.FC = () => {
   const { Title, Paragraph } = Typography;
-  console.log("gh testttttt")
   return (
     <div className="flex flex-col items-center justify-center h-screen text-white">
       <div className="text-center">

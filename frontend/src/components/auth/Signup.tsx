@@ -3,12 +3,16 @@ import Input from "../Input";
 import { Link } from "react-router-dom";
 import { SignupInput, signupSchema } from "../../validator/signup";
 import { message } from "antd";
+import { signup } from "../../redux/actions/authActions";
+import { useAppDispatch } from "../../hooks/useReduxHooks";
 
 const Signup: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowpassword] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
 
   message.config({
     duration: 1,
@@ -26,7 +30,8 @@ const Signup: React.FC = () => {
     const isValidate = signupSchema.safeParse(formData);
 
     if (isValidate.success) {
-      console.log(isValidate.data);
+      dispatch(signup(username, email, password));
+
       setUsername("");
       setEmail("");
       setPassword("");
