@@ -3,7 +3,7 @@ import { loginHandler, signupHandler } from "../controllers/auth.controller";
 
 const router: Router = express.Router();
 
-router.post("/signup", signupHandler);
-router.post("/login", loginHandler);
+router.route("/signup").post(signupHandler);
+router.route("/login").post(loginHandler);
 
 export { router as authRoute };
