@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface NavProps {
   navItems?: {
@@ -13,12 +13,12 @@ const Nav: React.FC<NavProps> = ({ navItems }) => {
     <ul className=" bg-slate-800 h-screen w-[200px]">
       {navItems?.map((el) => (
         <li key={el.key} className="mt-3 h-10 flex items-center justify-center">
-          <Link
+          <NavLink
             to={el.path}
             className="text-white text-lg h-9 w-[11rem] self-center rounded-lg pl-5 pt-1 hover:bg-slate-500 "
           >
             {el.label}
-          </Link>
+          </NavLink>
         </li>
       ))}
     </ul>

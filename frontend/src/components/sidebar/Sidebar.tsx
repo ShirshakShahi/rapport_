@@ -13,6 +13,11 @@ const Sidebar: React.FC<authProps> = ({ isAuthenticated }) => {
       path: "/home",
     },
     {
+      label: "/posts",
+      key: "post",
+      path: "/posts",
+    },
+    {
       label: "/about",
       key: "about",
       path: "/about-us",
