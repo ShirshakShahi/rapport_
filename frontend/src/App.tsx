@@ -6,10 +6,10 @@ import ProfileSidebar from "./components/sidebar/ProfileSidebar";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Post from "./components/post/Post";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 const App = () => {
-  
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   return (
     <Router>
@@ -19,6 +19,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/home" element={<Homepage />} />
+            <Route path="/about-us" element={<AboutPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/posts" element={<Post />} />

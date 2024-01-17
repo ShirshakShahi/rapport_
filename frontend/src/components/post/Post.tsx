@@ -1,10 +1,12 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Modal, Typography } from "antd";
+import { Avatar, Input, Modal, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import React, { useState } from "react";
+import PostItem from "./PostItem";
 
 const Post: React.FC = () => {
   const [postContent, setPostcontent] = useState<string>("");
+  const [postTitle, setPosttitle] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
 
   const isPostButtonDisabled = postContent.trim() === "";
@@ -15,8 +17,8 @@ const Post: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center h-full">
-      <div className="flex justify-center items-center w-[500px] h-24 bg-slate-800 rounded-3xl">
+    <div className="flex flex-col items-center justify- h-full">
+      <div className="flex justify-center items-center w-[500px] min-h-[112px] bg-slate-800 rounded-3xl overflow-y-auto">
         <div className="pr-2">
           <Avatar size={"large"} className="white" icon={<UserOutlined />} />
         </div>
@@ -40,6 +42,14 @@ const Post: React.FC = () => {
         footer={[]}
       >
         <form onSubmit={postHandler}>
+          <Input
+            type="text"
+            placeholder="Enter title"
+            value={postTitle}
+            onChange={(e) => setPosttitle(e.target.value)}
+          />
+          <br />
+          <br />
           <TextArea
             placeholder="What's on your mind"
             value={postContent}
@@ -60,6 +70,8 @@ const Post: React.FC = () => {
           </div>
         </form>
       </Modal>
+      <PostItem />
+      <PostItem />
     </div>
   );
 };
