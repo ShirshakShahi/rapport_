@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 
 interface authProps {
-  isAuthenticated: boolean;
+  isAuthenticated?: boolean;
 }
 
 const ProfileSidebar: React.FC<authProps> = ({ isAuthenticated }) => {

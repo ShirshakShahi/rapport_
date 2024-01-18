@@ -29,3 +29,5 @@ export const isAuth = (key: string) => {
     return false;
   }
 };
+
+export const TOKEN_LOCAL_STORAGE = "token";

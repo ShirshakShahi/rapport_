@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import Input from "../Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/useReduxHooks";
+import { login } from "../../redux/actions/authActions";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowpassword] = useState<boolean>(false);
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    dispatch(login(email, password));
+    navigate("/posts");
   };
 
   return (
