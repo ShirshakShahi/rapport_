@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk";
-import { API } from "../../config/baseUrl";
+import API from "../../config/baseUrl";
 import { ActionTypes } from "../../constants/action_types";
 import { ApiEndpoints } from "../../constants/api_endpoints";
 import { RootState } from "../store";

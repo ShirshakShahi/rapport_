@@ -102,7 +102,58 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
         error: action.payload,
       };
 
-    //todo update post and for other bio,comments and likes
+    case ActionTypes.UPDATE_POST_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+
+    case ActionTypes.UPDATE_POST_SUCCESS:
+      const { _id, title, content } = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        posts: state.posts.map((post) =>
+          post._id === _id ? { ...post, title, content } : post
+        ),
+        error: null,
+      };
+
+    case ActionTypes.UPDATE_POST_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+
+    case ActionTypes.ADD_COMMENT_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        error: null,
+      };
+
+    case ActionTypes.ADD_COMMENT_SUCCESS:
+      const newComment = action.payload;
+      return {
+        ...state,
+        isLoading: false,
+        post: {
+          ...state?.post,
+          replies: [...(state.post?.replies ?? []), newComment],
+        },
+        error: null,
+      };
+
+    case ActionTypes.ADD_COMMENT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
+
+    // TODO : reducers for UPVOTES later
 
     default:
       return state;

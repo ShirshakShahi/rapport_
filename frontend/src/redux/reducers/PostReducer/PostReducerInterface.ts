@@ -1,6 +1,6 @@
 export default interface PostReducerInterface {
   isLoading: boolean;
-  post?: IPost;
+  post: IPost;
   posts: IPost[];
   error?: any;
 }
