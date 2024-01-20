@@ -4,6 +4,7 @@ import {
   TOKEN_LOCAL_STORAGE,
   getLocalStorage,
   isAuth,
+  removeFromLocalStorage,
   setLocalStorage,
 } from "../../../helpers/frontend_helpers";
 import AuthenticationReducerInterface from "./AuthReducerInterface";
@@ -80,7 +81,7 @@ const reducer = (
       };
 
     case ActionTypes.LOGOUT_SUCCESS:
-      setLocalStorage(TOKEN_LOCAL_STORAGE, action.payload);
+      removeFromLocalStorage(TOKEN_LOCAL_STORAGE);
       return {
         signupResponse: {},
         isLoading: false,

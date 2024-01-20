@@ -4,17 +4,17 @@ import { ActionTypes } from "../../constants/action_types";
 import { ApiEndpoints } from "../../constants/api_endpoints";
 import { RootState } from "../store";
 
-interface AuthAction {
+export interface Action {
   type: string;
   payload?: any;
   // add any other properties if needed
 }
 
-type SignupAction = ThunkAction<void, RootState, unknown, AuthAction>;
-type LoginAction = ThunkAction<void, RootState, unknown, AuthAction>;
+export type Actiontype = ThunkAction<void, RootState, unknown, Action>;
+// type LoginAction = ThunkAction<void, RootState, unknown, Action>;
 
 const signup =
-  (username: string, email: string, password: string): SignupAction =>
+  (username: string, email: string, password: string): Actiontype =>
   async (dispatch: any) => {
     dispatch({
       type: ActionTypes.SIGNUP_REQUEST,
@@ -40,7 +40,7 @@ const signup =
   };
 
 const login =
-  (email: string, password: string): LoginAction =>
+  (email: string, password: string): Actiontype =>
   async (dispatch) => {
     dispatch({
       type: ActionTypes.LOGIN_REQUEST,
