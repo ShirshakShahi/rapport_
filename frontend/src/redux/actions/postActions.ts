@@ -47,6 +47,10 @@ const getSinglePost =
     }
   };
 
+const clearPost = (dispatch: any) => {
+  dispatch({ type: ActionTypes.CLEAR_POST });
+};
+
 const addPost =
   (title: string, content: string): Actiontype =>
   async (dispatch) => {
@@ -161,8 +165,8 @@ const updateComment =
     });
 
     try {
-      const { data } = await API.post(
-        ApiEndpoints.ADD_COMMENT.replace(":postId", postId).replace(
+      const { data } = await API.patch(
+        ApiEndpoints.UPDATE_COMMENT.replace(":postId", postId).replace(
           ":commentId",
           commentId
         ),
@@ -191,7 +195,7 @@ const deleteComment =
 
     try {
       const { data } = await API.delete(
-        ApiEndpoints.ADD_COMMENT.replace(":postId", postId).replace(
+        ApiEndpoints.DELETE_COMMENT.replace(":postId", postId).replace(
           ":commentId",
           commentId
         )
@@ -210,9 +214,12 @@ const deleteComment =
     }
   };
 
+//TODO : likes actions
+
 export {
   getAllPosts,
   getSinglePost,
+  clearPost,
   addPost,
   updatePost,
   deletePost,

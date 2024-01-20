@@ -58,6 +58,19 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
         error: action.payload,
       };
 
+    case ActionTypes.CLEAR_POST:
+      return {
+        ...state,
+        post: {
+          _id: "",
+          username: "",
+          title: "",
+          content: "",
+          upvotes: [],
+          replies: [],
+        },
+      };
+
     case ActionTypes.ADD_POST_REQUEST:
       return {
         ...state,
