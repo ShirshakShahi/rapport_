@@ -12,6 +12,7 @@ export interface IComment {
 
 export interface IPost extends Document {
   user: Schema.Types.ObjectId;
+  profile: Schema.Types.ObjectId;
   title: string;
   content: string;
   likes?: ILike[];
@@ -30,6 +31,7 @@ const commentSchema: Schema<IComment> = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+
   text: {
     type: String,
     required: true,
@@ -41,6 +43,10 @@ const postSchema: Schema<IPost> = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
     },
     title: {
       type: String,

@@ -11,9 +11,12 @@ const Login: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+
+  const submitHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    dispatch(login(email, password));
+    await dispatch(login(email, password));
     navigate("/posts");
   };
 

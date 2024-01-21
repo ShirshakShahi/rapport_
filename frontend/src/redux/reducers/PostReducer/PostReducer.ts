@@ -5,11 +5,14 @@ const initialState: PostReducerInterface = {
   isLoading: false,
   post: {
     _id: "",
-    username: "",
+    user: {
+      _id: "",
+      username: "",
+    },
     title: "",
     content: "",
-    upvotes: [],
-    replies: [],
+    likes: [],
+    comments: [],
   },
   posts: [],
 };
@@ -27,7 +30,7 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
       return {
         ...state,
         isLoading: false,
-        posts: action.payload,
+        posts: action.payload?.posts,
         error: null,
       };
 
@@ -63,11 +66,14 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
         ...state,
         post: {
           _id: "",
-          username: "",
+          user: {
+            _id: "",
+            username: "",
+          },
           title: "",
           content: "",
-          upvotes: [],
-          replies: [],
+          likes: [],
+          comments: [],
         },
       };
 
@@ -154,7 +160,7 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
         isLoading: false,
         post: {
           ...state?.post,
-          replies: [...(state.post?.replies ?? []), newComment],
+          comments: [...(state.post?.comments ?? []), newComment],
         },
         error: null,
       };
@@ -166,7 +172,7 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
         error: action.payload,
       };
 
-    // TODO : reducers for UPVOTES later
+    // TODO : reducers for likes later
 
     default:
       return state;

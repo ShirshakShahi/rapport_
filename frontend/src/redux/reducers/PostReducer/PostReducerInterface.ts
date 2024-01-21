@@ -7,11 +7,14 @@ export default interface PostReducerInterface {
 
 interface IPost {
   _id: string;
-  username: string;
+  user: {
+    _id?: string;
+    username: string;
+  };
   title: string;
   content: string;
-  upvotes?: { user: string }[];
-  replies?: {
+  likes?: { user: string }[];
+  comments?: {
     user: string;
     text?: string;
   }[];

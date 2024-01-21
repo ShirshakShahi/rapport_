@@ -85,8 +85,9 @@ const getSinglePost = async (req: Request, res: Response) => {
 
 const getAllPosts = async (req: Request, res: Response) => {
   try {
-    const posts = await Post.find({});
-
+    const posts = await Post.find({})
+      .populate("user", "username")
+      .populate("profile", "name");
     if (posts.length === 0) {
       res.status(404).json({ msg: "No posts found" });
       return;

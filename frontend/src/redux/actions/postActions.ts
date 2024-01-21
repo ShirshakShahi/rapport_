@@ -16,6 +16,7 @@ const getAllPosts = (): Actiontype => async (dispatch) => {
       payload: data,
     });
   } catch (error: any) {
+    // console.log("error", error.response?.data?.msg);
     dispatch({
       type: ActionTypes.GET_ALL_POST_FAILURE,
       payload: error.message || "Something went wrong",
@@ -69,6 +70,7 @@ const addPost =
         payload: data,
       });
     } catch (error: any) {
+      console.log("err in post ", error);
       dispatch({
         type: ActionTypes.ADD_POST_FAILURE,
         payload: error.message || "Something went wrong",
