@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Input, Modal, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useAppDispatch } from "../../hooks/useReduxHooks";
-import { addPost } from "../../redux/actions/postActions";
+import { updatePost } from "../../redux/actions/postActions";
 
-const AddPost = ({
+const EditPost = ({
+  postId,
   open,
   setOpen,
 }: {
+  postId: string;
   open: boolean;
   setOpen: (arg: boolean) => void;
 }) => {
@@ -20,7 +22,7 @@ const AddPost = ({
 
   const postHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addPost(postTitle, postContent));
+    dispatch(updatePost(postId, postTitle, postContent));
     setPostcontent("");
     setPosttitle("");
     setOpen(false);
@@ -31,7 +33,7 @@ const AddPost = ({
       <Modal
         title={
           <Typography.Title className="text-center bg-slate-50 rounded-2xl">
-            Create post
+            Edit post
           </Typography.Title>
         }
         open={open}
@@ -64,7 +66,7 @@ const AddPost = ({
               }`}
               disabled={isPostButtonDisabled}
             >
-              <strong className="text-white">POST</strong>
+              <strong className="text-white">EDIT</strong>
             </button>
           </div>
         </form>
@@ -73,4 +75,4 @@ const AddPost = ({
   );
 };
 
-export default AddPost;
+export default EditPost;

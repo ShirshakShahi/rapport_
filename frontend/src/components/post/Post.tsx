@@ -36,6 +36,7 @@ const Post: React.FC = () => {
       ) : (
         posts?.map((post) => (
           <PostItem
+            postId={post._id}
             key={post._id}
             user={post?.user}
             title={post?.title}

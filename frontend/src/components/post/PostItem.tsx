@@ -1,18 +1,11 @@
-import { Dropdown, Typography } from "antd";
-import React, { useEffect } from "react";
-
-const items: { label: string | React.ReactNode; key: string }[] = [
-  {
-    label: "edit",
-    key: "edit",
-  },
-  {
-    label: "delete",
-    key: "delete",
-  },
-];
+import { Dropdown, MenuProps, Typography } from "antd";
+import React, { useState } from "react";
+import { deletePost } from "../../redux/actions/postActions";
+import { useAppDispatch } from "../../hooks/useReduxHooks";
+import EditPost from "./EditPost";
 
 interface PostProps {
+  postId: string;
   user: {
     _id?: string;
     username: string;
@@ -25,7 +18,31 @@ interface PostProps {
   }[];
 }
 
-const PostItem: React.FC<PostProps> = ({ user, title, likes, comments }) => {
+const items: MenuProps["items"] = [
+  {
+    label: "edit",
+    key: "edit",
+  },
+  {
+    label: "delete",
+    key: "delete",
+  },
+];
+
+const PostItem: React.FC<PostProps> = ({
+  postId,
+  user,
+  title,
+  likes,
+  comments,
+}) => {
+  const [editOpen, setEditOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  const onClick: MenuProps["onClick"] = ({ key }) => {
+    key === "delete" ? dispatch(deletePost(postId)) : setEditOpen(true);
+  };
+
   return (
     <div className="bg-slate-900 w-[500px] h-[200px] rounded-3xl flex flex-col justify-around mt-4 ">
       <div className="text-black flex justify-between items-center rounded-t-lg h-9">
@@ -36,7 +53,7 @@ const PostItem: React.FC<PostProps> = ({ user, title, likes, comments }) => {
         </div>
 
         <div className="flex justify-center w-1/4 text-white">
-          <Dropdown menu={{ items }}>
+          <Dropdown menu={{ items, onClick }}>
             <div style={{ rotate: "90deg" }}>&hellip;</div>
           </Dropdown>
         </div>
@@ -54,6 +71,9 @@ const PostItem: React.FC<PostProps> = ({ user, title, likes, comments }) => {
           replies ({comments?.length})
         </div>
       </div>
+      {editOpen && (
+        <EditPost open={editOpen} setOpen={setEditOpen} postId={postId} />
+      )}
     </div>
   );
 };
