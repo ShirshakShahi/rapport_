@@ -10,12 +10,14 @@ const ProfileSidebar: React.FC<authProps> = ({ isAuthenticated }) => {
     {
       label: "/profile",
       key: "profile",
-      path: "/profle",
+      path: "/profile",
     },
   ];
+
+  const logout = "/logout";
   return (
     <div className="flex fixed right-0 justify-start items-center h-screen w-[200px]">
-      {isAuthenticated ? <Nav navItems={navItems} /> : <Nav />}
+      {isAuthenticated ? <Nav navItems={navItems} logout={logout} /> : <Nav />}
     </div>
   );
 };

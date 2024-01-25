@@ -16,7 +16,7 @@ const Post: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify- h-full">
+    <div className="flex flex-col items-center h-full">
       <div className="flex justify-center items-center w-[500px] min-h-[112px] bg-slate-800 rounded-3xl overflow-y-auto">
         <div className="pr-2">
           <Avatar size={"large"} className="white" icon={<UserOutlined />} />

@@ -9,6 +9,7 @@ import Post from "./components/post/Post";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import Protected from "./components/protected_route/Protected";
 import { useAppSelector } from "./hooks/useReduxHooks";
+import Profile from "./components/profile/Profile";
 
 const App = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
@@ -32,7 +33,7 @@ const App = () => {
                 </Protected>
               }
             />
-            <Route path="/post/:postId" element={<Signup />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
 

@@ -4,7 +4,7 @@ import { deletePost } from "../../redux/actions/postActions";
 import { useAppDispatch } from "../../hooks/useReduxHooks";
 import EditPost from "./EditPost";
 
-interface PostProps {
+export interface PostProps {
   postId: string;
   user: {
     _id?: string;
