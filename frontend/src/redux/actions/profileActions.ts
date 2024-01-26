@@ -23,10 +23,10 @@ const addProfile =
 
     try {
       const { data } = await API.post(ApiEndpoints.ADD_PROFILE, formData);
-      console.log("data in addprofile", data);
+      console.log("data in addprofile", data.profile);
       dispatch({
         type: ActionTypes.ADD_PROFILE_SUCCESS,
-        payload: data,
+        payload: data.profile,
       });
     } catch (error: any) {
       dispatch({
@@ -36,4 +36,23 @@ const addProfile =
     }
   };
 
-export { addProfile };
+const getMyProfile = (): Actiontype => async (dispatch: any) => {
+  dispatch({
+    type: ActionTypes.GET_PROFILE_REQUEST,
+  });
+
+  try {
+    const { data } = await API.get(ApiEndpoints.GET_MY_PROFILE);
+    dispatch({
+      type: ActionTypes.GET_PROFILE_SUCCESS,
+      payload: data,
+    });
+  } catch (error: any) {
+    dispatch({
+      type: ActionTypes.GET_PROFILE_FAILURE,
+      payload: error.message || "Something went wrong",
+    });
+  }
+};
+
+export { addProfile, getMyProfile };

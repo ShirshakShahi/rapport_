@@ -1,5 +1,6 @@
 export interface ProfileReducerInterface {
   isLoading: boolean;
+  userProfiles?: userProfile[];
   userProfile?: userProfile;
   error?: any;
 }

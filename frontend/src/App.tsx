@@ -33,7 +33,14 @@ const App = () => {
                 </Protected>
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile/:profileId"
+              element={
+                <Protected>
+                  <Profile />
+                </Protected>
+              }
+            />
           </Routes>
         </div>
 

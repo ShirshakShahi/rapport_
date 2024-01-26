@@ -26,7 +26,7 @@ const signupHandler = async (req: Request, res: Response): Promise<void> => {
 
     res.status(201).json({ data: newUser });
   } catch (error: any) {
-    res.status(500).json({ msg:  "Internal Server Error" });
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };
 
@@ -49,7 +49,7 @@ const loginHandler = async (req: Request, res: Response) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "1h",
     });
-    res.status(200).json({ token });
+    res.status(200).json({ token, user });
   } catch (error: any) {
     res.status(500).json({ msg: "Internal Server Error" });
   }

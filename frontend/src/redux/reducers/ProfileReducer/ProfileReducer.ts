@@ -3,6 +3,7 @@ import { ProfileReducerInterface } from "./ProfileReducerInterface";
 
 const initialState: ProfileReducerInterface = {
   isLoading: false,
+  userProfiles: [],
   userProfile: {
     user: "",
     name: "",
@@ -50,6 +51,7 @@ const reducer = (
     case ActionTypes.ADD_PROFILE_SUCCESS:
       return {
         isLoading: false,
+        userProfiles: [...(state.userProfiles ?? []), action.payload],
         userProfile: action.payload,
         error: null,
       };

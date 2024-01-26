@@ -28,7 +28,7 @@ const signup =
       });
 
       dispatch({
-        type: ActionTypes.LOGIN_SUCCESS,
+        type: ActionTypes.SIGNUP_SUCCESS,
         payload: data,
       });
     } catch (error: any) {
@@ -48,7 +48,7 @@ const login =
 
     try {
       const { data } = await API.post(ApiEndpoints.LOGIN, { email, password });
-      console.log(data.token);
+      console.log(data);
       dispatch({
         type: ActionTypes.LOGIN_SUCCESS,
         payload: {

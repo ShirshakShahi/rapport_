@@ -1,17 +1,28 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PiStudentFill } from "react-icons/pi";
 import AddPost from "../post/AddPost";
-import { useAppSelector } from "../../hooks/useReduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/useReduxHooks";
 import PostItem from "../post/PostItem";
 import AboutProfile from "./AboutProfile";
+import AddProfile from "./AddProfile";
+import { getMyProfile } from "../../redux/actions/profileActions";
 
 const Profile: React.FC = () => {
   const { posts } = useAppSelector((state) => state.post);
   const [open, setOpen] = useState(false);
   const [showPost, setShowPost] = useState<boolean>(true);
   const [showAbout, setShowAbout] = useState<boolean>(false);
+  const [addprofile, setAddprofile] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+  const { userProfile } = useAppSelector((state) => state.profile);
+
+  useEffect(() => {
+    dispatch(getMyProfile);
+    console.log(userProfile);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col justify-center items-center text-white">
@@ -83,7 +94,12 @@ const Profile: React.FC = () => {
           <li className="hover:cursor-pointer" onClick={() => setOpen(true)}>
             Add Post
           </li>
-          <li className="hover:cursor-pointer">Create Profile</li>
+          <li
+            className="hover:cursor-pointer"
+            onClick={() => setAddprofile(true)}
+          >
+            Create Profile
+          </li>
           <li className="hover:cursor-pointer">Update Profile</li>
         </ul>
       </div>
@@ -104,6 +120,7 @@ const Profile: React.FC = () => {
       {showAbout && <AboutProfile />}
 
       {open && <AddPost open={open} setOpen={setOpen} />}
+      {addprofile && <AddProfile open={addprofile} setOpen={setAddprofile} />}
     </div>
   );
 };

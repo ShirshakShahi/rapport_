@@ -1,16 +1,19 @@
 import React from "react";
 import Nav from "./Nav";
+import { useParams } from "react-router-dom";
 
 interface authProps {
   isAuthenticated?: boolean;
 }
 
 const ProfileSidebar: React.FC<authProps> = ({ isAuthenticated }) => {
+  const { profileId } = useParams();
+  console.log("prfooooooasdfasdfasdfasd", profileId);
   const navItems = [
     {
       label: "/profile",
       key: "profile",
-      path: "/profile",
+      path: `/profile/${profileId}`,
     },
   ];
 

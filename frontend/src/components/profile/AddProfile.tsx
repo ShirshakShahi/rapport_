@@ -71,6 +71,7 @@ const AddProfile = ({
   return (
     <>
       <Modal
+        style={{ overflow: "hidden" }}
         title={
           <Typography.Title className="text-center bg-slate-50 rounded-2xl">
             Create profile
@@ -90,6 +91,8 @@ const AddProfile = ({
             value={formData.name}
             onChange={handleChange}
           />
+          <br />
+          <br />
           <Input
             type="text"
             name="bio"
@@ -97,50 +100,56 @@ const AddProfile = ({
             value={formData.bio}
             onChange={handleChange}
           />
+          <br />
+          <br />
           <Input
             type="text"
             name="profilePic"
             placeholder="enter profile picture URL"
             value={formData.profilePic}
             onChange={handleChange}
-          />
+          />{" "}
+          <br /> <br />
           <Input
             type="text"
             name="LinkedIn"
             placeholder="enter LinkedIn URL"
             value={formData.socialMedia?.LinkedIn}
             onChange={handleSocialMediaChange}
-          />
+          />{" "}
+          <br /> <br />
           <Input
             type="text"
             name="Facebook"
             placeholder="enter Facebook URL"
             value={formData.socialMedia?.Facebook}
             onChange={handleSocialMediaChange}
-          />
+          />{" "}
+          <br /> <br />
           <Input
             type="text"
             name="Instagram"
             placeholder="enter Instagram URL"
             value={formData.socialMedia?.Instagram}
             onChange={handleSocialMediaChange}
-          />
+          />{" "}
+          <br /> <br />
           <Input
             type="text"
             name="Github"
             placeholder="enter Github URL"
             value={formData.socialMedia?.Github}
             onChange={handleSocialMediaChange}
-          />
+          />{" "}
+          <br /> <br />
           <Input
             type="text"
             name="skills"
             placeholder="enter skills (comma-separated)"
             value={formData.skills?.join(",")}
             onChange={handleSkillsChange}
-          />
-          <br />
-          <br />
+          />{" "}
+          <br /> <br />
           <div className="flex justify-center mt-12">
             <button
               className={`bg-blue-600 rounded-xl border-none h-10 w-[55%] hover:bg-blue-400`}
