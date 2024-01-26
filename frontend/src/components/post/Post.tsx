@@ -13,7 +13,7 @@ const Post: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col items-center h-full">

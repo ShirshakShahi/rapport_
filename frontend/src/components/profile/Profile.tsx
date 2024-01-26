@@ -3,12 +3,19 @@ import { Typography } from "antd";
 import React, { useState } from "react";
 import { PiStudentFill } from "react-icons/pi";
 import AddPost from "../post/AddPost";
+import { useAppSelector } from "../../hooks/useReduxHooks";
+import PostItem from "../post/PostItem";
+import AboutProfile from "./AboutProfile";
 
 const Profile: React.FC = () => {
+  const { posts } = useAppSelector((state) => state.post);
   const [open, setOpen] = useState(false);
+  const [showPost, setShowPost] = useState<boolean>(true);
+  const [showAbout, setShowAbout] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col justify-center items-center text-white">
-      <div className="flex items-center mt-2 h-[300px] w-[900px] bg-slate-800  min-h-[112px] rounded-xl overflow-y-auto">
+      <div className="flex items-center mt-2 h-[300px] w-[900px] bg-slate-800 rounded-xl overflow-y-auto">
         <div className="w-[650px] h-[250px]">
           <div className="flex justify-center items-center h-[100px] w-[100px] rounded-[50%] bg-fuchsia-300">
             {/* <img
@@ -51,9 +58,52 @@ const Profile: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mt-2 h-[500px] w-[900px] bg-slate-800  min-h-[112px] rounded-3xl overflow-y-auto">
-        {open && <AddPost open={open} setOpen={setOpen} />}
+      <div className="mt-2 w-[700px] bg-slate-800  min-h-[50px] rounded-lg overflow-y-auto m-1">
+        <ul className="flex justify-evenly items-center h-[50px]">
+          <li
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setShowPost(true);
+              setOpen(false);
+              setShowAbout(false);
+            }}
+          >
+            Posts
+          </li>
+          <li
+            className="hover:cursor-pointer"
+            onClick={() => {
+              setShowAbout(true);
+              setShowPost(false);
+              setOpen(false);
+            }}
+          >
+            About
+          </li>
+          <li className="hover:cursor-pointer" onClick={() => setOpen(true)}>
+            Add Post
+          </li>
+          <li className="hover:cursor-pointer">Create Profile</li>
+          <li className="hover:cursor-pointer">Update Profile</li>
+        </ul>
       </div>
+      {showPost && (
+        <>
+          {posts?.map((post) => (
+            <PostItem
+              postId={post._id}
+              key={post._id}
+              user={post?.user}
+              title={post?.title}
+              likes={post?.likes}
+              comments={post?.comments}
+            />
+          ))}
+        </>
+      )}
+      {showAbout && <AboutProfile />}
+
+      {open && <AddPost open={open} setOpen={setOpen} />}
     </div>
   );
 };
