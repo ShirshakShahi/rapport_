@@ -28,15 +28,13 @@ const addProfile = async (req, res) => {
   } catch (err) {}
 };
 
-const getProfile = async (req, res) => {
+const getMyProfile = async (req, res) => {
   try {
-    const { profileId } = req.params;
+    const userId = req.user._id;
 
-    const profile = await Profile.findById(profileId);
+    const profile = await Profile.findById({ user: userId });
     if (!profile) {
-      return res
-        .status(404)
-        .json({ msg: `No profile with id${profileId} found` });
+      return res.status(404).json({ msg: `No profile with id${userId} found` });
     }
 
     if (!req.user.equals(profile.user)) {
@@ -104,4 +102,4 @@ const updateBio = async (req, res) => {
   }
 };
 
-export { addProfile, getProfile, updateProfile, updateBio };
+export { addProfile, getMyProfile, updateProfile, updateBio };

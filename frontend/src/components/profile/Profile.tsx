@@ -20,9 +20,10 @@ const Profile: React.FC = () => {
   const { userProfile } = useAppSelector((state) => state.profile);
 
   useEffect(() => {
-    dispatch(getMyProfile);
-    console.log(userProfile);
-  }, [dispatch]);
+    // Check if user.id exists and then fetch the profile
+      dispatch(getMyProfile());
+      console.log(userProfile);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center text-white">

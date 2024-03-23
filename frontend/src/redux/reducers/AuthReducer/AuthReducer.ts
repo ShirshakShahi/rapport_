@@ -10,6 +10,7 @@ import {
 import AuthenticationReducerInterface from "./AuthReducerInterface";
 
 const initialState: AuthenticationReducerInterface = {
+  user: { _id: "" },
   isLoading: false,
   isLoginSuccessFul: isAuth("token") ? true : false,
   loginResponse: getLocalStorage("token") ?? {},
@@ -54,9 +55,11 @@ const reducer = (
     case ActionTypes.LOGIN_SUCCESS:
       console.log(action.payload);
       setLocalStorage("token", action.payload.token);
+      setLocalStorage("user", action.payload.user);
       return {
         ...state,
         isLoading: false,
+        user: action.payload.user,
         loginResponse: action.payload.token,
         isLoginSuccessFul: true,
         error: null,

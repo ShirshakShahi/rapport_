@@ -53,6 +53,7 @@ const login =
         type: ActionTypes.LOGIN_SUCCESS,
         payload: {
           token: data.token,
+          user: data.user,
         },
       });
     } catch (error: any) {

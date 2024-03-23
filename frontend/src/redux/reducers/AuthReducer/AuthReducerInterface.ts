@@ -1,4 +1,5 @@
 export default interface AuthenticationReducerInterface {
+  user?: { _id: string };
   isLoading: boolean;
   loginResponse?: string;
   signupResponse?: {};

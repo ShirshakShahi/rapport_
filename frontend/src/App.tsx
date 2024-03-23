@@ -34,7 +34,7 @@ const App = () => {
               }
             />
             <Route
-              path="/profile/:profileId"
+              path="/profile"
               element={
                 <Protected>
                   <Profile />
