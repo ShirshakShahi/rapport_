@@ -23,7 +23,6 @@ const addProfile =
 
     try {
       const { data } = await API.post(ApiEndpoints.ADD_PROFILE, formData);
-      console.log("data in addprofile", data.profile);
       dispatch({
         type: ActionTypes.ADD_PROFILE_SUCCESS,
         payload: data.profile,
@@ -43,7 +42,6 @@ const getMyProfile = (): Actiontype => async (dispatch: any) => {
 
   try {
     const { data } = await API.get(ApiEndpoints.GET_MY_PROFILE);
-    console.log("data in getmy profile issssssssssssssssss ", data);
     dispatch({
       type: ActionTypes.GET_PROFILE_SUCCESS,
       payload: data,

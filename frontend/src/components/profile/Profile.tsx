@@ -21,8 +21,7 @@ const Profile: React.FC = () => {
 
   useEffect(() => {
     // Check if user.id exists and then fetch the profile
-      dispatch(getMyProfile());
-      console.log(userProfile);
+    dispatch(getMyProfile());
   }, []);
 
   return (

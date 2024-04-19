@@ -53,7 +53,6 @@ const reducer = (
       };
 
     case ActionTypes.LOGIN_SUCCESS:
-      console.log(action.payload);
       setLocalStorage("token", action.payload.token);
       setLocalStorage("user", action.payload.user);
       return {

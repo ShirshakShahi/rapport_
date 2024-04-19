@@ -64,10 +64,11 @@ const addPost =
         title,
         content,
       });
-      console.log("data in add_post", data);
       dispatch({
         type: ActionTypes.ADD_POST_SUCCESS,
-        payload: data,
+        payload: {
+          newPost: data.newPost,
+        },
       });
     } catch (error: any) {
       console.log("err in post ", error);
@@ -96,7 +97,7 @@ const updatePost =
       console.log("data in update_post", data);
       dispatch({
         type: ActionTypes.UPDATE_POST_SUCCESS,
-        payload: data,
+        payload: data.updatedPost,
       });
     } catch (error: any) {
       dispatch({
@@ -121,7 +122,7 @@ const deletePost =
       console.log("data in delete_post", data);
       dispatch({
         type: ActionTypes.DELETE_POST_SUCCESS,
-        payload: data,
+        payload: postId,
       });
     } catch (error: any) {
       dispatch({

@@ -85,10 +85,11 @@ const reducer = (state = initialState, action: any): PostReducerInterface => {
       };
 
     case ActionTypes.ADD_POST_SUCCESS:
+      console.log("action payloaaaaad : ", action.payload);
       return {
         ...state,
         isLoading: false,
-        posts: [...state.posts, action.payload],
+        posts: [...state.posts, action.payload.newPost],
         error: null,
       };
 

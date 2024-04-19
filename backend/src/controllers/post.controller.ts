@@ -58,9 +58,9 @@ const deletePost = async (req, res) => {
       return;
     }
 
-    const deletedPost = await post.deleteOne();
+    const deletedPost = await post.deleteOne({ _id: postId });
 
-    res.status(200).json({ deletedPost });
+    res.status(200).json({ deletedPost, postId });
   } catch (err) {
     return res.status(500).json({ msg: "Internal Server Error" });
   }
